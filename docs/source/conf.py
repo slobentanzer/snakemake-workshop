@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Snakemake workshop'
+copyright = '2022, saezlab'
+author = 'Robin Fallegger'
 
 release = '0.1'
 version = '0.1.0'
