@@ -1,13 +1,11 @@
-Welcome to Lumache's documentation!
-===================================
+Welcome to the snakemake workshop tutorial
+==========================================
 
-**Lumache** (/lu'make/) is a Python library for cooks and food lovers
-that creates recipes mixing random ingredients.
-It pulls data from the `Open Food Facts database <https://world.openfoodfacts.org/>`_
-and offers a *simple* and *intuitive* API.
+In this workshop, we will try to go into more details about how to use snakemake in order to make your workflows easier to manage and more reproducible.
+In particular we are going to take a look at how to start a new project, set up a snakemake working environment, and then go over the basics of snakemake.
 
-Check out the :doc:`usage` section for further information, including
-how to :ref:`installation` the project.
+`Snakemake's own tutorial <https://snakemake.readthedocs.io/en/stable/tutorial/tutorial.html>`_ goes over the most important topics, but neglects some more advanced concepts like how to set up environments automatically, and how to setup and execute workflows on a SLURM cluster.
+
 
 .. note::
 
