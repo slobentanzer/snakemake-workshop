@@ -1,5 +1,6 @@
-Setting up snakemake
---------------------
+Setup for the tutorial
+======================
+
 Of course, any decent snakemake tutorial will start by installing snakemake. Install the latest snakemake package as described in the `setup guide <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html#installation-via-conda-mamba>`_
 
 For M1 MacOS
