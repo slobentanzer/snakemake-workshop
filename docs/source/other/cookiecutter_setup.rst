@@ -19,6 +19,7 @@ If you do not have it installed you can do so using conda
 
 Once this is done, navigate to a folder where you would like to create your new working directory of your project. The command below will create a new directory containing most files necessary for a new project. Cookiecutter will prompt you for some 
 
+.. _cookiecutter:
 .. code-block:: console
 
     cookiecutter gh:snakemake-workflows/cookiecutter-snakemake-workflow

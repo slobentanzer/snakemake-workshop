@@ -17,11 +17,12 @@ Contents
 .. toctree::
    :caption: Basic sc-tutorial
    :name: basic
-   :hidden:
-   :maxdepth: 1
-   setup
+   :maxdepth: 2
+
+   tutorial/setup
+   tutorial/QC
 
 .. toctree:: 
    :Caption: Other
 
-   cookiecutter_setup
+   other/cookiecutter_setup
