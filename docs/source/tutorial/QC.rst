@@ -29,6 +29,7 @@ The rule below specifies that in order to create a filtered version of the data 
         script:
             'scripts/QC_samples.py'
 
+
 .. note:: 
     Each directive (input, output, etc) is available in python as a list: e.g. the input path as ``snakemake.input[0]``
 
@@ -61,7 +62,7 @@ Modify the previous rule to the following:
 This rule will now be able to QC any files that have the right filepath pattern. You can rerun the previous command for the second sample:
 
 .. code-block:: console
-    
+
     snakemake results/QC/filtered_sample2.h5ad --use-conda -c1
 
 Add parameters
