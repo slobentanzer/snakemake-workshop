@@ -15,6 +15,14 @@ Contents
 --------
 
 .. toctree::
+   :caption: Basic sc-tutorial
+   :name: basic
+   :hidden:
+   :maxdepth: 1
 
    setup
    
+.. toctree:: 
+   :Caption: Other
+
+   cookiecutter_setup
