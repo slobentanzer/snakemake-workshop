@@ -125,6 +125,7 @@ There are two advantages of using this approach: firstly, it simplifies and cent
 
 Merge
 =====
+Now that we have QCed, normalised and log-transformed all the files, we can proceed with combining them to do clustering.
 
 Temporary files
 ---------------
