@@ -19,9 +19,8 @@ Contents
    :name: basic
    :hidden:
    :maxdepth: 1
-
    setup
-   
+
 .. toctree:: 
    :Caption: Other
 

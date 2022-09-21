@@ -1,12 +1,9 @@
-Setup project environment
-=========================
-
 Setting up snakemake
-====================
+--------------------
 Of course, any decent snakemake tutorial will start by installing snakemake. Install the latest snakemake package as described in the `setup guide <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html#installation-via-conda-mamba>`_
 
 For M1 MacOS
-----------------
+------------
 For many packages there are no versions available for the M1 chips. If you encounter this situation, you can install packages that were compiled for Intel chips instead. For this, you need to create the snakemake environment by setting appropriate flags. Snakemake will then automatically install packages that were designed for Intel. This occurs frequently, mainly with Bioconductor packages.
 
 .. note:: 
@@ -24,17 +21,19 @@ You can now follow the same guide as above to install the snakemake package.
 
 
 Project structure
-=================
+-----------------
 Now that you have a conda environment with basically only snakemake installed, let's clone the tutorial git repository. Navigate to a folder where you would like to clone it into.
 
 .. code-block:: console
     git clone https://github.com/saezlab/snk-tutorial
 
-The project repository structure is shown below. Snakemake developers recommend a folder structure, which separates the workflow from data, results and configurations files. 
+The project repository structure is shown below. Snakemake developers recommend a folder structure that separates the workflow from data, results and configurations files. This structure is a more lightweight version of the cookiecutter version provided by the snakemake workflows project. You can find how to setup your own project directory :ref:`here <cookiecutter_setup>`.
 
 .. code-block:: none
 
     ├── .gitignore
+    ├── LICENSE
+    ├── README.md
     ├── workflow
     │   ├── rules
     |   │   ├── download_data.smk
@@ -46,5 +45,3 @@ The project repository structure is shown below. Snakemake developers recommend 
     |   └── Snakefile
     └── config
         └── config.yaml
-
-This structure is a more lightweight version of the cookiecutter version provided by the snakemake workflows project. You can find how to setup your own project directory :ref:`here <cookiecutter_setup>`
