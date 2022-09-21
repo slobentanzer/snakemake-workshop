@@ -17,7 +17,6 @@ Contents
 .. toctree::
    :caption: Basic sc-tutorial
    :name: basic
-   :maxdepth: 2
 
    tutorial/setup
    tutorial/QC
