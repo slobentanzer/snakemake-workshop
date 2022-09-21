@@ -1,3 +1,4 @@
+.. _setup for tutorial:
 Setup for the tutorial
 ======================
 
@@ -80,11 +81,13 @@ Dry-run example
 ---------------
 
 .. code-block:: console
+
     snakemake --use-conda -n
 
 The command specifies that it should be run using any defined environments with ``--use-conda``. The ``-n`` flag triggers a dry-run and tells you what will be launched. This let's you know how many processes will be launched and can help estimate how many cores you should use. The output should look something like the following:
 
 .. code-block:: console
+
     Building DAG of jobs...
     Conda environment workflow/envs/scanpy.yaml will be created.
     Job stats:
@@ -135,9 +138,11 @@ Install dependencies
 It can be useful to do the installation separately, especially if you have complex dependencies, or if you want to set up the environments for later execution without access to the internet. When you actually run a job, you need to specify the number of cores you will use with ``-c N`` or ``-cN``, where N is the number of cores.
 
 .. code-block:: console
+
     snakemake --conda-create-envs-only --use-conda -c1
 
 .. code-block:: console
+
     Building DAG of jobs...
     Creating conda environment workflow/envs/scanpy.yaml...
     Downloading and installing remote packages.
@@ -150,6 +155,7 @@ Download data
 With the necessary dependencies installed, you can now download the data with the following command:
 
 .. code-block:: console
+    
     snakemake --use-conda -c1
 
 .. note:: 
