@@ -27,10 +27,11 @@ Download tutorial repository
 Now that you have a conda environment with basically only snakemake installed, let's clone the tutorial git repository. Navigate to a folder where you would like to clone it to.
 
 .. code-block:: console
+
     git clone https://github.com/saezlab/snk-tutorial
     cd snk-tutorial
 
-The project repository structure is shown below. Snakemake developers recommend a folder structure that separates the workflow from data, results and configurations files. This structure is a more lightweight version of the cookiecutter version provided by the snakemake workflows project. You can find how to setup your own project directory :ref:`here <cookiecutter>`.
+The project repository structure is shown below. Snakemake developers recommend a folder structure that separates the workflow from data, results and configurations files. This structure is a more lightweight version of the cookiecutter version provided by the snakemake workflows project. You can find how to setup your own project directory using a template :ref:`here <cookiecutter>`.
 
 .. code-block:: none
 
@@ -75,7 +76,7 @@ Firstly, it requires a minimum version requirement of snakemake itself. Then it 
 .. note::
     Newer versions of snakemake keep track of modifications to this file and will prompt you to rerun your workflow if it has changed. It does however not track exactly which parameters changed, so it is left to the user whether it requires a rerun or not.
 
-Then there is a ``rule all`` statement: this is a special rule with only inputs, no outputs and no actual task. This is a special rule placed always at the top of the ``Snakefile`` and defines which files you want to create in the workflow. You can check exactly which processed will be run using the following command.
+Then there is a ``rule all`` statement: this is a special rule with only inputs, no outputs and no actual task. This is a special rule placed always at the top of the ``Snakefile`` and defines which files you want to create in the workflow. You can check exactly which processes will be run using the following command.
 
 Dry-run example
 ---------------
@@ -98,26 +99,30 @@ The command specifies that it should be run using any defined environments with 
     dwn_make_samples        1              1              1
     total                   3              1              1
 
-    [Wed Sep 21 11:05:53 2022]
+
+    [Thu Sep 22 15:47:04 2022]
     checkpoint dwn_download:
         output: data/filtered_gene_bc_matrices/hg19
         jobid: 2
-        resources: tmpdir=/var/folders/vl/1y1qg3c911x2hvqbsl7zfpz40000gn/T
+        reason: Missing output files: data/filtered_gene_bc_matrices/hg19
+        resources: tmpdir=/var/folders/j2/xqm_3c792md7svmbnk61b97c0000gn/T
     Downstream jobs will be updated after completion.
 
 
-    [Wed Sep 21 11:05:53 2022]
+    [Thu Sep 22 15:47:04 2022]
     rule dwn_make_samples:
         input: <TBD>
         output: data/sample1.h5ad, data/sample2.h5ad, data/sample3.h5ad
         jobid: 1
-        resources: tmpdir=/var/folders/vl/1y1qg3c911x2hvqbsl7zfpz40000gn/T
+        reason: Missing output files: data/sample1.h5ad; Input files updated by another job: data/filtered_gene_bc_matrices/hg19
+        resources: tmpdir=/var/folders/j2/xqm_3c792md7svmbnk61b97c0000gn/T
 
-    [Wed Sep 21 11:05:53 2022]
+    [Thu Sep 22 15:47:04 2022]
     localrule all:
         input: data/sample1.h5ad
         jobid: 0
-        resources: tmpdir=/var/folders/vl/1y1qg3c911x2hvqbsl7zfpz40000gn/T
+        reason: Input files updated by another job: data/sample1.h5ad
+        resources: tmpdir=/var/folders/j2/xqm_3c792md7svmbnk61b97c0000gn/T
 
     Job stats:
     job                 count    min threads    max threads
@@ -127,11 +132,18 @@ The command specifies that it should be run using any defined environments with 
     dwn_make_samples        1              1              1
     total                   3              1              1
 
+    Reasons:
+        (check individual jobs above for details)
+        input files updated by another job:
+            all, dwn_make_samples
+        missing output files:
+            dwn_download, dwn_make_samples
+
     This was a dry-run (flag -n). The order of jobs does not reflect the order of execution.
 
 The output first tells you that a new conda environment needs to be created. You can take a look at the corresponding dependency file to see which packages will be downloaded.
 
-Then it shows you that there are three separate jobs that would be run: 'all' is what you have seen previously in the ``Snakefile``, the other two are defined in the download module.Removing the dry-run flag would first install the conda environment and then execute the jobs.
+Then it shows you that there are three separate jobs that would be run: 'all' is what you have seen previously in the ``Snakefile``, the other two are defined in the download module. Removing the dry-run flag would first install the conda environment and then execute the jobs.
 
 Install dependencies
 --------------------
@@ -146,9 +158,9 @@ It can be useful to do the installation separately, especially if you have compl
     Building DAG of jobs...
     Creating conda environment workflow/envs/scanpy.yaml...
     Downloading and installing remote packages.
-    Environment for /Users/demian/Documents/Projects/test_tuto/workflow/rules/../envs/scanpy.yaml created (location: .snakemake/conda/4577545cccceee132b33e64a472c90c8)
+    Environment for /Users/user/Documents/Projects/snk-tutorial/workflow/rules/../envs/scanpy.yaml created (location: .snakemake/conda/d6540f768478c6b08ce2736c834601d8_)
 
-The installation should work flawlessly and is stored in the working directory, with a hash as name. Any changes in the dependency file will trigger a new installation.
+The installation should work flawlessly and stored in the working directory, with a hash as name. Any changes in the dependency file will trigger a new installation.
 
 Download data
 -------------
@@ -160,4 +172,19 @@ With the necessary dependencies installed, you can now download the data with th
 
 .. note:: 
     You can see that any output to the shell or stdout/stderr are printed to the console. You can check older run logs in the ``.snakemake/log`` directory.
-    For parallelised jobs this will print every job output simultaneously to the same console. It can be therefore advantageous to set up `your own logging <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files>`_ for local execution. In slurm cluster exection, the output is automatically sent to the equivalent .out or .err files separately for each job.
+    For parallelised jobs this will print every job output simultaneously to the same console. Think about setting up `your own logging <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files>`_ for local execution. In slurm cluster exection, the output is automatically sent to the equivalent .out or .err files separately for each job.
+
+If you now try to request one sample again, snakemake will tell you that there is nothing to be done:
+
+.. code-block:: console
+
+    snakemake data/sample1.h5ad --use-conda -c1
+
+.. code-block:: console
+
+    Building DAG of jobs...
+    Updating job dwn_make_samples.
+    Nothing to be done (all requested files are present and up to date).
+    Complete log: .snakemake/log/2022-09-22T111259.106356.snakemake.log
+
+This is exactly the functionality that makes snakemake so useful: only do what is necessary. 

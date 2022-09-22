@@ -40,7 +40,9 @@ You can add it at the bottom of the Snakefile and run the command below in order
 
     snakemake results/QC/filtered_sample1.h5ad --use-conda -c1
 
-The output shows you some snakemake information about the jobs that will be run, the activation of the conda environment and then the some script output. Notice that your working directory now contains a ``results`` folder with the data, as snakemake takes care of folder and file management after they are encoded in the rules. It also takes care of cleaning up files produced by failed jobs, since those might be corrupted in some way.
+The output shows you some snakemake information about the jobs that will be run, the activation of the conda environment and then some script output. 
+
+Notice that your working directory now contains a ``results`` folder with the filtered data. Snakemake takes care of folder and file management after they are encoded in the rules. It also cleans up files produced by failed jobs, since those might be corrupted in some way.
 
 Wildcards
 ---------
@@ -89,9 +91,9 @@ The ``'scripts/QC_samples.py'`` script is throwing a warning because it expects 
 Notice that the lines are separated with a comma and have a name (mainly for readability).
 
 .. note:: 
-    In python, the names of the parameters do not matter and will be available in a list, i.e. ``snakemake.params[0]``, ``snakemake.params[1]``, etc.
+    Inside the python script, the names of the parameters do not matter and will be available in a list, i.e. ``snakemake.params[0]``, ``snakemake.params[1]``, etc.
 
-    In R, named elements are duplicated and available either by index or by name, i.e. here ``snakemake@params`` has length **6** and elements are accessible e.g. as ``snakemake@params$min_gene`` and ``snakemake@params[[0]]``
+    In R, named elements are duplicated and available by index *and* by name, i.e. here ``snakemake@params`` has length **6** and elements are accessible e.g. as ``snakemake@params$min_gene`` and ``snakemake@params[[0]]``
 
 For rules/pipelines with many parameters, it can be quite a hassle to parse all of these parameters and keep track of where you need to change them. Instead of adding each individually, you can pass specific keys of the ``config`` file that contains these parameters:
 
@@ -127,7 +129,7 @@ There are two advantages of using this approach: firstly, it simplifies and cent
 
 Merge
 =====
-Now that we have QCed and normalised all the files, we can proceed with combining them to do clustering and create some nice-looking UMAPs. 
+Now that we have a rule to QC and normalise the files, we can proceed with combining them to do clustering and create some nice-looking UMAPs. 
 
 As with parameters, a rule can take more than one file as input and output. You could write them out one-by-one, however that can be inconvenient when pooling many samples at a time. You can simplify this by using the ``expand()`` function as shown in the example below.
 
@@ -223,20 +225,7 @@ In your ``results`` directory, you should now indeed have only the ``merged.h5ad
 
 Force execution
 ---------------
-If you now try to execute the previous command again, snakemake will tell you that there is nothing to be done:
-
-.. code-block:: console
-
-    snakemake results/merged.h5ad --use-conda -c1
-
-.. code-block:: console
-
-    Building DAG of jobs...
-    Updating job dwn_make_samples.
-    Nothing to be done (all requested files are present and up to date).
-    Complete log: .snakemake/log/2022-09-22T111259.106356.snakemake.log
-
-This is exactly the functionality that makes snakemake so useful: only do what is necessary. However, while working you might want to make sure that you are using the latest script/config/env/rules in your pipleine as, generally, changes in rules are not tracked!)
+While working you might want to make sure that you are using the latest script/config/env/rules in your pipeline as, generally, changes in rules are not tracked!
 
 You can either force the last rule:
 
