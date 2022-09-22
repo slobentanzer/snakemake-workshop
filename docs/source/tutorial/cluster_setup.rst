@@ -79,8 +79,6 @@ The profile contains ``config.yaml`` that defines default options for snakemake 
     #   - high_memory_rule:mem_mb=12000
     #   - long_running_rule:runtime=1200
 
-You can also add default resources by adding it in this file, e.g.:
-
 Renaming logs
 -------------
 When you run jobs on the cluster, all console output from snakemake will be redirected automatically to the slurm .out and .err files. You can change their naming by modifying ``settings.json`` to the following:
@@ -134,6 +132,8 @@ You detach from it with ``Ctrl-B + D``. To re-attach to the previous session:
 
     tmux a
 
+You can find a cheatsheet with tmux commands `here <https://tmuxcheatsheet.com>`_
+
 Running snakemake inside interactive job
 ----------------------------------------
 `Installing snakemake <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html#installation-via-conda-mamba>`_ and your conda environments is no different than installing it on your local computer.
@@ -152,7 +152,7 @@ Snakemake monitors your jobs while they are running. It should therefore **not b
     snakemake -n --profile ./path_profile_dir 
 
     #-j N specifies the max number of simultaneous jobs submitted at the same time
-    #launch snakemake with max 10 parallel jobs
+    #launch snakemake with max 10 parallel jobs, overwrites whatever is in the defaults
     snakemake -j 10 --profile ./path_profile_dir 
 
 .. note::
