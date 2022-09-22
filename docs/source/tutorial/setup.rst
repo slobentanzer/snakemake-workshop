@@ -85,7 +85,7 @@ Dry-run example
 
     snakemake --use-conda -n
 
-The command specifies that it should be run using any defined environments with ``--use-conda``. The ``-n`` flag triggers a dry-run and tells you what will be launched. This let's you know how many processes will be launched and can help estimate how many cores you should use. The output should look something like the following:
+The command specifies that it should be run using any defined environments with ``--use-conda``. The ``-n`` flag triggers a dry-run and tells you exactly what will be launched. It also let's you know how many processes will be launched and can help estimate how many cores you should use. The output should look something like the following:
 
 .. code-block:: console
 
@@ -160,7 +160,7 @@ It can be useful to do the installation separately, especially if you have compl
     Downloading and installing remote packages.
     Environment for /Users/user/Documents/Projects/snk-tutorial/workflow/rules/../envs/scanpy.yaml created (location: .snakemake/conda/d6540f768478c6b08ce2736c834601d8_)
 
-The installation should work flawlessly and stored in the working directory, with a hash as name. Any changes in the dependency file will trigger a new installation.
+The installation should work flawlessly and the environment will be stored inside the ``.snakemake/`` folder located in the working directory, with a hash as name. Any changes in the dependency file will trigger a new installation.
 
 Download data
 -------------
@@ -171,8 +171,11 @@ With the necessary dependencies installed, you can now download the data with th
     snakemake --use-conda -c1
 
 .. note:: 
-    You can see that any output to the shell or stdout/stderr are printed to the console. You can check older run logs in the ``.snakemake/log`` directory.
-    For parallelised jobs this will print every job output simultaneously to the same console. Think about setting up `your own logging <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files>`_ for local execution. In slurm cluster exection, the output is automatically sent to the equivalent .out or .err files separately for each job.
+    You can see that any output to the shell or stdout/stderr are printed to the console. For parallelised jobs this will print every job output simultaneously to the same console. 
+
+    You can check older run logs in the ``.snakemake/log`` directory.
+    
+    Think about setting up `your own logging <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#log-files>`_ for local execution. In slurm cluster exection, the output is automatically sent to the equivalent .out or .err files separately for each job.
 
 If you now try to request one sample again, snakemake will tell you that there is nothing to be done:
 

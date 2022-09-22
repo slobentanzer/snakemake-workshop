@@ -11,7 +11,7 @@ You will first learn how to implement a snakemake ``rule`` that does basic quali
 
 Simple rule
 -----------
-In Snakemake, a ``rule`` is an instruction - written in YAML - that ties a (set of) input file(s) to output files/directories, and an associated operation, which can either be an inline chunk of python code, a script (python/R), a notebook or any set of operation that can be written out in a shell command.
+In Snakemake, a ``rule`` is an instruction - written in YAML, nestled in python code - that ties a (set of) input file(s) to output files/directories, using an associated operation, which can either be an inline chunk of python code, a script (python/R), a notebook or any set of operation that can be written out in a shell command.
 
 The rule below specifies that in order to create a filtered version of the data from sample1, it requires one file as input, and uses a python script, that should be run in a given conda environment. You can take a look at the script in order to see what it does exactly, but it does some basic filtering and normalises the count data.
 
@@ -67,6 +67,11 @@ This rule will now be able to QC any files that have the right filepath pattern.
 .. code-block:: console
 
     snakemake results/QC/filtered_sample2.h5ad --use-conda -c1
+
+You can see that snakemake automatically guessed which input file to use, given the output filename.
+
+.. note:: 
+    Be aware that any file inside the ``data/`` folder  that has a ``.h5ad``extension can be used as an input of this rule, whether you intended that behaviour or not. This underlines the need of having a rigorous project structure.
 
 Add parameters
 --------------
@@ -125,7 +130,7 @@ For rules/pipelines with many parameters, it can be quite a hassle to parse all 
 There are two advantages of using this approach: firstly, it simplifies and centralises parameter management to one single file, and secondly, the changes of parameters are also tracked by snakemake and you will be prompted to rerun the pipeline if they do.
 
 .. note:: 
-    These two rule examples are equivalent in what they do, but the parsing of the parameters is different. The latter actually passes a whole python ``dict`` object in ``snakemake.params[0]``. Check out ``'scripts/QC_samples.py'`` if you want to know more.
+    These two rule examples are equivalent in what they do, but the parsing of the parameters is different. The latter actually passes a whole python ``dict`` object in ``snakemake.params[0]``. Check out ``workflow/scripts/QC_samples.py`` if you want to know more.
 
 Merge
 =====
