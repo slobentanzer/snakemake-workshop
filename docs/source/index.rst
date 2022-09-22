@@ -20,6 +20,7 @@ Contents
 
    tutorial/setup
    tutorial/QC
+   tutorial/modules
 
 .. toctree:: 
    :Caption: Other
