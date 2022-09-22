@@ -2,7 +2,7 @@
 QC samples
 ==========
 
-In order to illustrate the basic functionalities in snakemake, this tutorial uses the pbmc dataset from 10x Genomics. After running the `setup tutorial <setup for tutorial>`, you should have three samples in compressed Anndata format in the ``data`` folder.
+In order to illustrate the basic functionalities in snakemake, this tutorial uses the pbmc dataset from 10x Genomics. After running the :ref:`setup tutorial <setup for tutorial>`, you should have three samples in compressed Anndata format in the ``data`` folder.
 
 You will first learn how to implement a snakemake ``rule`` that does basic quality control filtering of a sample, and learn how to generalise it for any sample using so-called ``wildcards``. Then you will learn how to aggregate several files/samples using the ``expand()`` function.
 
@@ -214,9 +214,9 @@ Snakmeake should tell you that the temporary files were deleted upon successfull
 .. note:: 
     If a job depending on temporary files fails, the temp files are not deleted.
 
-    For debugging your workflow, it might still be usefull to use the ``-notemp``option, which prevents temporary file deletion, especially if they a long time to compute.
+    For debugging your workflow, it might still be usefull to use the ``--notemp`` option, which prevents temporary file deletion, especially if they a long time to compute.
 
-In your ``results`` directory, you should no indeed have only the ``merged.h5ad`` file. You can also look at your nice UMAPs in the ``plots`` folder.
+In your ``results`` directory, you should now indeed have only the ``merged.h5ad`` file. You can also look at your nice UMAPs in the ``plots`` folder.
 
 .. note:: 
     In general, I have found it usefull to clearly separate rules that do data cleaning, transformation, etc from plotting, as the latter can change quite often in order to make plots more readable. It is therefore not very practical if the plots are tied to expensive computations.
@@ -236,12 +236,16 @@ If you now try to execute the previous command again, snakemake will tell you th
     Nothing to be done (all requested files are present and up to date).
     Complete log: .snakemake/log/2022-09-22T111259.106356.snakemake.log
 
-This is exactly the functionality that makes snakemake so useful: only do what is necessary. However, while working you might want to make sure that you are using the latest script/config/env/rules in your pipleine (generally, changes in rules are not tracked!). You can either force the last rule:
+This is exactly the functionality that makes snakemake so useful: only do what is necessary. However, while working you might want to make sure that you are using the latest script/config/env/rules in your pipleine as, generally, changes in rules are not tracked!)
+
+You can either force the last rule:
 
 .. code-block:: console
+
     snakemake results/merged.h5ad --use-conda --force -n
 
 .. code-block:: console
+
     ...
     Would remove temporary output results/QC/filtered_sample1.h5ad
     Would remove temporary output results/QC/filtered_sample2.h5ad

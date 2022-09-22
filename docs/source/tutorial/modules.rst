@@ -63,6 +63,7 @@ Now that you have made a new module, you need to give its location to the Snakef
 The implementation should look something like the following. Notice that the path is relative to the ``Snakefile`` location.
 
 .. code-block:: python
+
     module QC:
         snakefile: "rules/QC.smk"
         config: config
@@ -78,6 +79,7 @@ Now try executing the creation of the merged object again:
 This should now throw an error since it cannot locate the environment definition:
 
 .. code-block:: console
+
     Building DAG of jobs...
     Updating job dwn_make_samples.
     WorkflowError:
@@ -87,6 +89,7 @@ This should now throw an error since it cannot locate the environment definition
 Indeed, while the input and output paths are relative to the working directory, the ``conda`` and ``script`` directives take paths relative to the file location where the rule is defined. These should therefore be changed to:
 
 .. code-block:: python
+
     rule QC_sample:
         input:
             'data/{sample}.h5ad'
@@ -120,6 +123,7 @@ In general, it is recommended to structure a project as such that scripts, resul
 This would therefore look something like:
 
 .. code-block:: python
+    
     rule QC_sample:
         input:
             'data/{sample}.h5ad'

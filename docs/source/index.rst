@@ -22,6 +22,12 @@ Contents
    tutorial/QC
    tutorial/modules
 
+.. toctree::
+   :caption: Cluster setup
+   :name: basic
+
+   tutorial/cluster_setup
+
 .. toctree:: 
    :Caption: Other
 
