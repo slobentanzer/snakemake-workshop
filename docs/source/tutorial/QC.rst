@@ -221,7 +221,7 @@ Snakmeake should tell you that the temporary files were deleted upon successfull
 .. note:: 
     If a job depending on temporary files fails, the temp files are not deleted.
 
-    For debugging your workflow, it might still be usefull to use the ``--notemp`` option, which prevents temporary file deletion, especially if they a long time to compute.
+    For debugging your workflow, it might still be usefull to add the ``--notemp`` option to the CLI call, and prevent temporary file deletion, especially if they take a long time to compute.
 
 In your ``results`` directory, you should now indeed have only the ``merged.h5ad`` file. You can also look at your nice UMAPs in the ``plots`` folder.
 

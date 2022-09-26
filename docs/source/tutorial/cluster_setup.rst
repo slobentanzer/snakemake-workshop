@@ -17,7 +17,7 @@ Firstly, you will need to connect to your cluster of choice and go to your worki
     conda install cookiecutter # in order to install profiles
     cookiecutter https://github.com/Snakemake-Profiles/slurm.git
 
-The cookiecutter command will interactively let you choose what kind of profile you would like to create. They will be set in ``config.yaml`` inside the profile folder.
+The cookiecutter command will interactively let you choose what kind of profile you would like to create. They will be set in ``config.yaml`` inside the profile folder. If you do not know what to use, you can click enter and use the default ones (in brackets).
 
 Here are some of the most important parameters:
 
@@ -25,7 +25,7 @@ profile_name
     folder where profile will be stored
 
 use_singularity
-    boolean, whether to use singularities by default if they are in the rules
+    boolean, whether to use singularities by default if they are in the rules (e.g. docker image)
 
 use_conda
     boolean,  whether to use conda environments by default if they are in the rules. I recommend setting this to true

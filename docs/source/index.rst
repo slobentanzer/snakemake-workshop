@@ -21,6 +21,7 @@ Contents
    tutorial/setup
    tutorial/QC
    tutorial/modules
+   tutorial/advanced
 
 .. toctree::
    :caption: Cluster setup

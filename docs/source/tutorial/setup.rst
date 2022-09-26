@@ -31,7 +31,11 @@ Now that you have a conda environment with basically only snakemake installed, l
     git clone https://github.com/saezlab/snk-tutorial
     cd snk-tutorial
 
-The project repository structure is shown below. Snakemake developers recommend a folder structure that separates the workflow from data, results and configurations files. This structure is a more lightweight version of the cookiecutter version provided by the snakemake workflows project. You can find how to setup your own project directory using a template :ref:`here <cookiecutter>`.
+The project repository structure is shown below. Snakemake developers recommend a folder structure that separates the workflow from data, results and configurations files.
+.. note:: 
+
+    This structure is a more lightweight version of the cookiecutter template provided by the snakemake workflows project. You can find how to setup your own project directory using a template :ref:`here <cookiecutter>`.
+
 
 .. code-block:: none
 
@@ -50,7 +54,14 @@ The project repository structure is shown below. Snakemake developers recommend 
     └── config
         └── config.yaml
 
-The ``workflow`` folder contains a Snakefile, and several subfolders which contain pipeline modules, scripts and any package dependencies required to execute the workflow. There is already a module called ``download_data.smk`` which will take care of downloading some toy data (PBMCs) and create some toy samples. Let's first take a look at the Snakefile:
+The ``workflow`` folder contains a Snakefile, and several subfolders which contain pipeline modules, scripts and any package dependencies required to execute the workflow. There is already a module called ``download_data.smk`` which will take care of downloading some toy data (PBMCs) and create some toy samples. 
+
+Editing the Snakefile
+---------------------
+
+You can use any text editor to edit snakemake code found in the Snakefile, which is just a mix of python code and yaml-like directives. I personnally use `VS Code<https://code.visualstudio.com>`_ with the `Snakemake language extension <https://marketplace.visualstudio.com/items?itemName=Snakemake.snakemake-lang>`_, whereas snakemake creators recommend using the `Atom editor <https://atom.io>`_. You can also use any IDE with python code highlighting such as Jupyterlab.
+
+Let's now take a look at the Snakefile:
 
 .. code-block:: python
     
@@ -71,12 +82,14 @@ The ``workflow`` folder contains a Snakefile, and several subfolders which conta
 
     use rule * from download_data as dwn_*
 
-Firstly, it requires a minimum version requirement of snakemake itself. Then it defines the path to the ``configfile``, where parameters used in the workflow are stored. These parameters are then available in the nested dict ``config``.
+Overall you can see that it is python code with two blocks in YAML. Firstly, it requires a minimum version requirement of snakemake itself. Then it defines the path to the ``configfile``, where parameters used in the workflow are stored. These parameters are then available in the nested dict ``config``.
 
 .. note::
-    Newer versions of snakemake keep track of modifications to this file and will prompt you to rerun your workflow if it has changed. It does however not track exactly which parameters changed, so it is left to the user whether it requires a rerun or not.
+    Newer versions of snakemake keep track of modifications to this config file and will prompt you to rerun your workflow if it has changed. It does however not track exactly which parameters changed, so it is left to the user whether it requires a rerun or not.
 
-Then there is a ``rule all`` statement: this is a special rule with only inputs, no outputs and no actual task. This is a special rule placed always at the top of the ``Snakefile`` and defines which files you want to create in the workflow. You can check exactly which processes will be run using the following command.
+Then, there is a ``rule all`` statement: this is a special rule with only inputs, no outputs and no actual task. This is a special rule placed always at the top of the ``Snakefile`` and defines which files you want to create in the workflow, instead of writing them out by hand. Additionally, it allows you to add files programmatically using python. 
+
+You can check exactly which processes will be run using the following command:
 
 Dry-run example
 ---------------

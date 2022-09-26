@@ -168,3 +168,5 @@ and a project structure:
     |   └── Snakefile
     └── config
         └── config.yaml
+
+In the next section, you will learn about global wildcards, and so-called checkpoints.
