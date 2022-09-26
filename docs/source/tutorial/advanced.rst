@@ -119,11 +119,11 @@ The first block is a special rule, called a checkpoint, that has a folder as out
 
 The second block is a so-called input function that only has ``wildcard`` as argument. This is necessary in order to propagate the wildcards from output to input (remember that snakemake is a backwards-looking worflow manager), and tell snakemake which rules' inputs/outputs are connected.
 
-`Input functions<https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#input-functions>`_ have to return a list of filenames, or alternatively a dict (e.g. with named keys), that you need to `unpack. <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#input-functions-and-unpack>`_
+`Input functions <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#input-functions>`_ have to return a list of filenames, or alternatively a dict (e.g. with named keys), that you need to `unpack. <https://snakemake.readthedocs.io/en/stable/snakefiles/rules.html#input-functions-and-unpack>`_
 
 The last block is a rule that just splits the data into three, and creates toy samples. The input directive is only the input function defined above, but other files could have been added as well.
 
-In this example, if we are asking snakemake to create a sample file (e.g. ``data/sample3.h5ad``), snakemake knows that the download checkpoint needs to be run, but does not yet know the filenames given as input to ``rule make_samples``. When it is done downloading and extracting the data, it will run the input function and then pass its output to the last rule.
+In this example, if we're asking snakemake to create a sample file (e.g. ``data/sample3.h5ad``), snakemake knows that the download checkpoint needs to be run, but does not yet know the filenames given as input to ``rule make_samples``. When it is done downloading and extracting the data, it will run the input function and then pass its output to the last rule.
 
 You can see this in the rule blocks in the output of the following command:
 
@@ -209,7 +209,7 @@ You will first change the ``config.yaml`` file and make entries for each sample,
 You now need to change your ``QC_sample`` rule, and pass these parameters instead:
 
 .. code-block:: python
-    
+
     rule QC_sample:
         input:
             'data/{sample}.h5ad'

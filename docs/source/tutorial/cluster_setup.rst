@@ -136,6 +136,7 @@ You can find a cheatsheet with tmux commands `here <https://tmuxcheatsheet.com>`
 
 Running snakemake inside interactive job
 ----------------------------------------
+
 `Installing snakemake <https://snakemake.readthedocs.io/en/stable/getting_started/installation.html#installation-via-conda-mamba>`_ and your conda environments is no different than installing it on your local computer.
 
 Snakemake monitors your jobs while they are running. It should therefore **not be run on the login nodes** but in a separate interactive job.
