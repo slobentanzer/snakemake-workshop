@@ -204,7 +204,7 @@ You will first change the ``config.yaml`` file and make entries for each sample,
         'max_pct_mt': 5
 
 .. note:: 
-    To be clear, it is not recommende to use different QC parameters for different samples, but this is just showing off some of the capabilities of snakemake based on this example.
+    To be clear, it is not recommended to use different QC parameters for different samples, but this is just showing off some of the capabilities of snakemake based on this example.
 
 You now need to change your ``QC_sample`` rule, and pass these parameters instead:
 
@@ -256,3 +256,5 @@ You will need to force execution in order to get it to run:
 .. code-block:: console
     
     snakemake results/merged.h5ad --use-conda --force -c3
+
+You are now at the end of this tutorial and we hope you have learned most of the basics for your needs. You can also check out the original snakemake tutorial and their excellent documentation.

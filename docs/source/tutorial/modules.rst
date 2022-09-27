@@ -169,4 +169,4 @@ and a project structure:
     └── config
         └── config.yaml
 
-In the next section, you will learn about global wildcards, and so-called checkpoints.
+In the next section, you will learn about global wildcards, so-called checkpoints, and how to use lambda expressions to dynamically change parameters of rules.
